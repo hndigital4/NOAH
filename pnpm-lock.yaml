@@ -42,6 +42,31 @@ importers:
         specifier: ^1.6.0
         version: 1.6.1(@types/node@20.19.43)
 
+  packages/runtime-core:
+    dependencies:
+      '@noah/eventbus':
+        specifier: workspace:*
+        version: link:../../services/eventbus
+      '@noah/logger':
+        specifier: workspace:*
+        version: link:../../services/logger
+      '@noah/scheduler':
+        specifier: workspace:*
+        version: link:../../services/scheduler
+      '@noah/storage':
+        specifier: workspace:*
+        version: link:../../services/storage
+    devDependencies:
+      '@types/node':
+        specifier: ^20.14.0
+        version: 20.19.43
+      typescript:
+        specifier: ^5.5.2
+        version: 5.9.3
+      vitest:
+        specifier: ^1.6.0
+        version: 1.6.1(@types/node@20.19.43)
+
   services/eventbus:
     devDependencies:
       '@types/node':
