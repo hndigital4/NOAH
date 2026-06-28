@@ -5,3 +5,5 @@ export * from "./command-engine.js";
 export * from "./command-context.js";
 export * from "./lifecycle.js";
 export * from "./runtime.js";
+export * from "./boot-manager.js";
+export * from "./shutdown-manager.js";

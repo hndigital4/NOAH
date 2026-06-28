@@ -1,7 +1,9 @@
+import { BootManager } from "./boot-manager.js";
 import { CommandEngine } from "./command-engine.js";
 import { CommandRegistry } from "./command-registry.js";
 import type { RuntimeStatus } from "./lifecycle.js";
 import { ServiceRegistry } from "./service-registry.js";
+import { ShutdownManager } from "./shutdown-manager.js";
 
 export class Runtime {
   private statusValue: RuntimeStatus = "created";
@@ -9,6 +11,9 @@ export class Runtime {
   readonly services = new ServiceRegistry();
   readonly commands = new CommandRegistry();
   readonly commandEngine = new CommandEngine(this.commands);
+
+  private readonly bootManager = new BootManager(this.services);
+  private readonly shutdownManager = new ShutdownManager(this.services);
 
   get status(): RuntimeStatus {
     return this.statusValue;
@@ -20,7 +25,7 @@ export class Runtime {
     this.statusValue = "booting";
 
     try {
-      await this.services.startAll();
+      await this.bootManager.boot();
       this.statusValue = "ready";
     } catch (error) {
       this.statusValue = "failed";
@@ -34,7 +39,7 @@ export class Runtime {
     this.statusValue = "stopping";
 
     try {
-      await this.services.stopAll();
+      await this.shutdownManager.shutdown();
       this.statusValue = "stopped";
     } catch (error) {
       this.statusValue = "failed";
