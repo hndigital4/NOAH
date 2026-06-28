@@ -1,0 +1,35 @@
+{"packageManager": "pnpm@11.9.0",
+  "name": "noah",
+  "version": "0.1.0-alpha",
+  "private": true,
+  "description": "NOAH Organic Operating Platform — monorepo root",
+  "engines": { "node": ">=20.0.0", "pnpm": ">=9.0.0" },
+  "scripts": {
+    "build":          "turbo run build",
+    "test":           "turbo run test",
+    "test:ci":        "turbo run test:ci --concurrency=4",
+    "lint":           "turbo run lint",
+    "typecheck":      "turbo run typecheck",
+    "format":         "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "format:check":   "prettier --check \"**/*.{ts,tsx,json,md}\"",
+    "bench":          "turbo run bench",
+    "clean":          "turbo run clean && rm -rf node_modules",
+    "dev":            "turbo run dev --parallel"
+  },
+  "devDependencies": {
+    "@types/node":                      "^20.14.0",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser":        "^7.13.0",
+    "@vitest/coverage-v8":              "^1.6.0",
+    "eslint":                           "^8.57.0",
+    "eslint-config-prettier":           "^9.1.0",
+    "eslint-plugin-import":             "^2.29.1",
+    "prettier":                         "^3.3.2",
+    "turbo":                            "^2.0.6",
+    "typescript":                       "^5.5.2",
+    "vitest":                           "^1.6.0"
+  },
+  "pnpm": {
+    "overrides": { "typescript": "^5.5.2" }
+  }
+}

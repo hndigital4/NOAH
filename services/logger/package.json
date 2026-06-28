@@ -1,0 +1,29 @@
+{
+  "name": "@noah/logger",
+  "version": "0.1.0",
+  "private": true,
+  "description": "NOAH Structured Logger + Audit Trail writer",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "import": "./dist/index.js", "types": "./dist/index.d.ts" }
+  },
+  "scripts": {
+    "build":     "tsc --project tsconfig.json",
+    "test":      "vitest run --coverage",
+    "test:ci":   "vitest run --coverage --reporter=verbose",
+    "lint":      "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "clean":     "rm -rf dist coverage .turbo"
+  },
+  "dependencies": {
+    "@noah/eventbus": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node":        "^20.14.0",
+    "@vitest/coverage-v8":"^1.6.0",
+    "typescript":         "^5.5.2",
+    "vitest":             "^1.6.0"
+  }
+}

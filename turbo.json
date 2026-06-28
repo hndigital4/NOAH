@@ -1,0 +1,14 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["NODE_ENV", "NOAH_ENV"],
+  "tasks": {
+    "build":     { "dependsOn": ["^build"], "outputs": ["dist/**", ".turbo/**"], "cache": true },
+    "test":      { "dependsOn": ["build"],  "outputs": ["coverage/**"],           "cache": false },
+    "test:ci":   { "dependsOn": ["build"],  "outputs": ["coverage/**"],           "cache": false },
+    "bench":     { "dependsOn": ["build"],                                         "cache": false },
+    "lint":      { "dependsOn": [],         "outputs": [],                         "cache": true },
+    "typecheck": { "dependsOn": ["^build"], "outputs": [],                         "cache": true },
+    "dev":       { "dependsOn": ["^build"],                          "persistent": true, "cache": false },
+    "clean":     {                                                                  "cache": false }
+  }
+}

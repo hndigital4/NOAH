@@ -1,0 +1,31 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 00:00 UTC daily
+  workflow_dispatch:
+
+jobs:
+  full-suite:
+    name: Full Suite + Benchmarks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Build
+        run: pnpm turbo run build
+      - name: Test
+        run: pnpm turbo run test:ci
+      - name: Benchmarks
+        run: pnpm turbo run bench
+      - name: Post results to team channel
+        if: always()
+        run: echo "Nightly complete — ${{ job.status }}"
