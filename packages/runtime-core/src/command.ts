@@ -2,7 +2,7 @@ export type CommandId = string;
 
 export type CommandSource = "system" | "user" | "automation" | "plugin";
 
-export interface CommandContext {
+export interface CommandRequestContext {
   readonly requestId: string;
   readonly source: CommandSource;
   readonly timestamp: string;
@@ -11,7 +11,7 @@ export interface CommandContext {
 export interface CommandRequest<TInput = unknown> {
   readonly id: CommandId;
   readonly input?: TInput;
-  readonly context: CommandContext;
+  readonly context: CommandRequestContext;
 }
 
 export interface CommandResult<TOutput = unknown> {
